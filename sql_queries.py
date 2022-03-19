@@ -12,15 +12,15 @@ songplay_table_create = ("""CREATE TABLE IF NOT EXISTS songplays (
                                 song_play_id serial primary key,
                                 start_time timestamp not null,
                                 user_id int not null,
-                                level varchar (20),
-                                song_id varchar(20), 
-                                artist_id varchar(20), 
+                                level varchar,
+                                song_id varchar, 
+                                artist_id varchar, 
                                 session_id int,
-                                location varchar (50),
-                                user_agent varchar );""")
+                                location varchar,
+                                user_agent varchar);""")
 
 user_table_create = ("""CREATE TABLE IF NOT EXISTS users (
-                                user_id int ,
+                                user_id int primary key,
                                 first_name varchar (50) not null, 
                                 last_name varchar (50),
                                 gender varchar (1), 
@@ -77,6 +77,7 @@ user_table_insert = ("""INSERT INTO users
  level
  )
  VALUES(%s, %s, %s, %s, %s)
+ ON CONFLICT (user_id) DO NOTHING
 """)
 
 song_table_insert = ("""INSERT INTO songs
